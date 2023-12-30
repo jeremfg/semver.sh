@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# SPDX-License-Identifier: MIT
+#
+# Performs the necessary actions to generate a new release of semver.sh
+
+# Stop on error
+set -euo pipefail
+
+# Get root directory
+ROOT="$(dirname "$0")/.."
+ROOT=$(realpath "${ROOT}")
+
+# Get version to release from the first argument
+if [[ $# -ne 1 ]]; then
+  echo "Usage: $0 <version>"
+  exit 1
+fi
+ver="$1"
+
+# Update version in bpkg.json
+sed -i "s/\"version\": \".*\"/\"version\": \"${ver}\"/" "${ROOT}/bpkg.json"
+git add "${ROOT}/bpkg.json"
+
+# Update version in semver
+sed -i "s/^VERSION=\".*\"$/VERSION=\"${ver}\"/" "${ROOT}/src/semver"
+git add "${ROOT}/src/semver"
+
+# Commit the changes
+git commit -m "Release ${ver}"
+git tag -a "${ver}" -m "Release ${ver}"

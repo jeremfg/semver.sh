@@ -1,0 +1,8 @@
+{
+  "editor.rulers": [120],
+  "shellcheck.useWorkspaceRootAsCwd": true,
+  "shellcheck.customArgs": ["--enable", "all", "-x"],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.shellcheck": "explicit"
+  }
+}

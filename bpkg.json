@@ -1,0 +1,7 @@
+{
+  "name": "semver.sh",
+  "version": "1.0.0",
+  "description": "Use git tags to version your software using Semantic Versioning 2.0.0",
+  "global": "true",
+  "install": "install src/semver ${PREFIX}/bin"
+}
